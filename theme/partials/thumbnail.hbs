@@ -4,15 +4,15 @@
 
 <div class="albumList"
     data-sub-html="{{meta.caption}}"
-    data-download-url="{{relative urls.download}}"
+    data-download-url="{{relative_to_s3 urls.download}}"
 
     {{~#if isVideo~}}
         data-html="#media{{id}}"
     {{~else~}}
-        data-src="{{relative urls.large}}"
+        data-src="{{relative_to_s3 urls.large}}"
     {{~/if~}}
 
-    data-exthumbimage="{{relative urls.thumbnail}}"
+    data-exthumbimage="{{relative_to_s3 urls.thumbnail}}"
     {{~#if @root.settings.hideExtension~}}
         data-filename="{{remove_extension filename}}"
     {{~else~}}
@@ -37,12 +37,12 @@
 >
 
     {{~#if isVideo~}}
-    <a href="{{relative urls.download}}">
+    <a href="{{relative_to_s3 urls.download}}">
     {{~else~}}
-    <a href="{{relative urls.large}}">
+    <a href="{{relative_to_s3 urls.large}}">
     {{~/if~}}
         <img
-            src="{{relative urls.small}}"
+            src="{{relative_to_s3 urls.small}}"
             width="{{multiply 300 (aspect meta.width meta.height)}}"
             height="300"
           {{~#if @root.settings.hideExtension~}}

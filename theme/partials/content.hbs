@@ -30,8 +30,8 @@
           {{! Display its image files in the slider !}}
           {{#each files~}}
             {{#unless isVideo}}
-              <li data-thumb="{{relative urls.thumbnail}}" data-src="{{relative urls.large}}">
-                <img src="{{relative urls.large}}" alt="{{filename}}">
+              <li data-thumb="{{relative_to_s3 urls.thumbnail}}" data-src="{{relative_to_s3 urls.large}}">
+                <img src="{{relative_to_s3 urls.large}}" alt="{{filename}}">
               </li>
             {{/unless}}
           {{~/each}}
@@ -49,7 +49,7 @@
       {{! Hide the featured album from listings !}}
       {{#compare title '!=' @root.settings.featuredAlbum}}
         <a href="{{relative url}}">
-          <img src="{{relative previews.0.urls.small}}" alt="">
+          <img src="{{relative_to_s3 previews.0.urls.small}}" alt="">
           <div class="caption" style="display: inline-block">
             <h3>{{title}}</h3>
             <div class="summary">{{summary}}</div>
