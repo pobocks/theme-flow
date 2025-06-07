@@ -40,22 +40,57 @@
     </ul>
   {{/if}}
   {{/if}}
+  <!-- project statement and jumplist -->
+  {{#if album.home}}
+  {{#if settings.project_description}}
+  <div class="preamble">
+  <details id="project-description" open>
+  <summary>Project Description</summary>
+  {{{settings.project_description}}}
+  </details>
+  </div>
+  {{/if}}
+  <div class="jumplist-container">
+  <select id="jumplist" onfocus="this.selectedIndex = 0" onchange="location = this.options[this.selectedIndex].value;">
+    <option value="" style="display: none">Jump to dog by name!</option>
+    {{#each album.albums~}}
+      {{#compare title '!=' 'All Pics'}}
+      {{#compare title '!=' 'Top Shots'}}
+      {{#compare title '!=' 'Unknown'}}
+        <option value="#{{remove_extension url}}">{{title}}</option>
+      {{/compare}}{{/compare}}{{/compare}}
+    {{~/each}}
+  </select>
+  </div>
+  {{/if}}
 
   <!--
     Nested albums, if any
   -->
   <div id="albums" class="justified-gallery">
     {{#each album.albums~}}
+      {{#if (included_in title 'All Pics;Top Shots;Unknown')}}
+      <a href="{{relative url}}" id="{{remove_extension url}}">
+        <img src="{{relative_to_s3 previews.0.urls.small}}" alt="">
+        <div class="caption" style="display: inline-block">
+          <h3>{{title}}</h3>
+          <div class="summary">{{summary}}</div>
+        </div>
+      </a>
+      {{/if}}
+    {{/each~}}
+    {{#each album.albums~}}
       {{! Hide the featured album from listings !}}
+      {{#unless (included_in title 'All Pics;Top Shots;Unknown')}}
       {{#compare title '!=' @root.settings.featuredAlbum}}
-        <a href="{{relative url}}">
+        <a href="{{relative url}}" id="{{remove_extension url}}">
           <img src="{{relative_to_s3 previews.0.urls.small}}" alt="">
           <div class="caption" style="display: inline-block">
             <h3>{{title}}</h3>
             <div class="summary">{{summary}}</div>
           </div>
         </a>
-      {{/compare}}
+      {{/compare}}{{/unless}}
     {{~/each}}
   </div>
 
