@@ -247,3 +247,43 @@ nav.pagination a {
     padding-top: 1em;
   }
 }
+/* Hide the #panel-N when the corresponding radio is not checked */
+:has([aria-controls="albums"] input[type="radio"]:not(:checked)) #albums,
+:has([aria-controls="misc-bullshit"] input[type="radio"]:not(:checked)) #misc-bullshit,
+:has([aria-controls="panel-3"] input[type="radio"]:not(:checked)) #panel-3,
+:has([aria-controls="panel-4"] input[type="radio"]:not(:checked)) #panel-4,
+:has([aria-controls="panel-5"] input[type="radio"]:not(:checked)) #panel-5,
+:has([aria-controls="panel-6"] input[type="radio"]:not(:checked)) #panel-6,
+:has([aria-controls="panel-7"] input[type="radio"]:not(:checked)) #panel-7,
+:has([aria-controls="panel-8"] input[type="radio"]:not(:checked)) #panel-8,
+:has([aria-controls="panel-9"] input[type="radio"]:not(:checked)) #panel-9,
+/* ... add more tabs and panels as needed ... */
+:has([aria-controls="panel-10"] input[type="radio"]:not(:checked)) #panel-10 {
+  display: none;
+}
+
+label[role="tab"] {
+  cursor: pointer;
+
+  /* hide the radio button */
+  & input[type="radio"] {
+    display: none;
+  }
+}
+
+/* Tab labels */
+.tab-label {
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &:has(input[type="radio"]:checked) {
+    opacity: 1;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+}

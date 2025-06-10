@@ -63,11 +63,24 @@
   </select>
   </div>
   {{/if}}
-
+   <nav role="tablist">
+    <!--
+        The aria-selected="true" and tabindex="0" attributes are omitted for this example
+        See: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/tab_role#example
+      -->
+    <label role="tab" aria-controls="albums" for="tab-1" class="tab-label">
+      <input type="radio" name="tab-group-1" id="tab-1" checked />
+      Dogs
+    </label>
+    <label role="tab" aria-controls="misc-bullshit" for="tab-2" class="tab-label">
+      <input type="radio" name="tab-group-1" id="tab-2" />
+      Tab 2
+    </label>
+  </nav>
   <!--
     Nested albums, if any
   -->
-  <div id="albums" class="justified-gallery">
+  <div id="albums" class="justified-gallery" role="tabpanel" aria-labeled-by="tab-1">
     {{#each album.albums~}}
       {{#if (included_in title 'All Pics;Top Shots;Unknown')}}
       <a href="{{relative url}}" id="{{remove_extension url}}">
@@ -93,7 +106,9 @@
       {{/compare}}{{/unless}}
     {{~/each}}
   </div>
-
+  <div id="misc-bullshit" class="justified-gallery" role="tabpanel" aria-labeled-by="tab-2">
+  <p>Some bullshit goes here</p>
+  </div>
   <!--
     All photos and videos
   -->
