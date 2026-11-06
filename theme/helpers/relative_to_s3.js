@@ -1,3 +1,3 @@
 module.exports = (url) => {
-   return `https://dog-site-pictures.nyc3.cdn.digitaloceanspaces.com/${url}`
+   return `https://camera-club.nyc3.cdn.digitaloceanspaces.com/${url}`
 }
